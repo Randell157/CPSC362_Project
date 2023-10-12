@@ -2,7 +2,7 @@
 
 This is the group project Github for Group 8 of CPSC 362
 
-Members:
+Members: <br>
 Randell Lapid <br>
 Joshua Yee <br>
 Shane Grant <br>
