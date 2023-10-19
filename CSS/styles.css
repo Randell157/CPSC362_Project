@@ -39,6 +39,9 @@ nav li {
 footer {
     background-color: aquamarine;
     margin: 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 
 footer h3 {
