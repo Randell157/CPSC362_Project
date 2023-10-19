@@ -6,8 +6,6 @@
     box-sizing: border-box;
 }
 
-body {}
-
 h1 {
     text-transform: uppercase;
     text-align: center;
@@ -36,4 +34,16 @@ nav li {
     line-height: 30px;
     color: white;
     padding: 10px 14px;
+}
+
+footer {
+    background-color: aquamarine;
+    margin: 0;
+}
+
+footer h3 {
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
 }
