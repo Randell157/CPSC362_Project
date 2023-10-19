@@ -1,4 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body {}
+
 h1 {
     text-transform: uppercase;
     text-align: center;
+}
+
+header {
+    background-color: lightblue;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+header ul {
+    text-align: right;
+
+}
+
+nav {
+    overflow: hidden;
+    font-weight: bold;
+}
+
+nav li {
+    display: inline-block;
+    line-height: 30px;
+    color: white;
+    padding: 10px 14px;
 }
