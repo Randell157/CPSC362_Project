@@ -11,6 +11,8 @@ body {}
 h1 {
     text-transform: uppercase;
     text-align: center;
+    margin-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 header {
