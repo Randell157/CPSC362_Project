@@ -10,23 +10,12 @@
     <h1>Kaytrix</h1>
 
     <!--testing textboxes and its ability to respond with js script-->
-    <input type="text" id="leftNum" placeholder="enter left number" maxlength="2">
-    <input type="text" id="rightNum" placeholder="enter right number" maxlength="2">
-    <input type="button" id="myButton" value="calculate">
+    <input type="number" id="leftNum" placeholder="enter left number" maxlength="2">
+    <input type="number" id="rightNum" placeholder="enter right number" maxlength="2">
+    <button onclick="add()">calculate</button>
     <p class="output" id="myOut">apple</p>
     <!--javascript code, leave it at the bottom of body-->
-    <script src="JS/index.js">
-      const leftNum = document.getElementById("leftNum");
-      const rightNum = document.getElementById("rightNum");
-      const myButton = document.getElementById("myButton");
-      const myOut = document.getElementById("myOut");
-
-      function add()
-      {
-        console.log(toString(leftNum.value))
-      }
-
-      myButton.addEventListener('click', add())
+    <script src="JS/index.js"> 
     </script>
   </body>
 </html>

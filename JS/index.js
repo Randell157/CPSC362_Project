@@ -45,3 +45,14 @@ function UserEntersRightMatrixSize()
         }
     }
 }
+
+const leftNum = document.getElementById("leftNum");
+const rightNum = document.getElementById("rightNum");
+const myOut = document.getElementById("myOut");
+
+function add()
+{
+    let myAnswer = Number(leftNum.value) + Number(rightNum.value);
+    console.log(myAnswer);
+    console.log("hi"); 
+}
