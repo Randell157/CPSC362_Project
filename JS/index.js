@@ -47,12 +47,33 @@ function UserEntersRightMatrixSize()
 }
 
 const leftNum = document.getElementById("leftNum");
+const myOperation = document.getElementById("myOp");
 const rightNum = document.getElementById("rightNum");
-const myOut = document.getElementById("myOut");
+let myOut = document.getElementById("myOut");
 
 function add()
 {
-    let myAnswer = Number(leftNum.value) + Number(rightNum.value);
-    console.log(myAnswer);
-    console.log("hi"); 
+    let myAnswer = 0;
+
+    if (myOperation.value == "+")
+    {
+        myAnswer = Number(rightNum.value) + Number(leftNum.value);
+    }
+    else if (myOperation.value == "-")
+    {
+        myAnswer = Number(rightNum.value) - Number(leftNum.value);
+    }
+    else if (myOperation.value == "/")
+    {
+        myAnswer = Number(rightNum.value) / Number(leftNum.value);
+    }
+    else if (myOperation.value == "*")
+    {
+        myAnswer = Number(rightNum.value) * Number(leftNum.value);
+    }
+    else
+    {
+        myAnswer = "ERROR";
+    }
+    myOut.innerHTML = String(myAnswer);
 }
