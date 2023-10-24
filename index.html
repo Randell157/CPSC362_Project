@@ -10,11 +10,11 @@
     <h1>Kaytrix</h1>
 
     <!--testing textboxes and its ability to respond with js script-->
-    <input type="number" id="leftMatRowSize" placeholder=0 maxlength="2">
-    <input type="number" id="leftMatColSize" placeholder=0 maxlength="2">
+    <input type="number" id="leftMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
+    <input type="number" id="leftMatColSize" min=0 max=10  placeholder=0 maxlength="2">
     <input type="text" id="myOp" placeholder = "+" maxLength="1">
-    <input type="number" id="rightMatRowSize" placeholder=0 maxlength="2">
-    <input type="number" id="rightMatColSize" placeholder=0 maxlength="2">
+    <input type="number" id="rightMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
+    <input type="number" id="rightMatColSize" min=0 max=10  placeholder=0 maxlength="2">
     <button id="leftButton" onclick="UserEntersLeftMatrixSize()">Create Left Matrix</button>
     <button id="rightButton" onclick="UserEntersRightMatrixSize()">Create Right Matrix</button>
     <!--javascript code, leave it at the bottom of body-->
