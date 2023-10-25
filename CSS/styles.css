@@ -36,6 +36,11 @@ nav li {
     padding: 10px 14px;
 }
 
+section {
+    margin: 20px;
+}
+
+
 footer {
     background-color: aquamarine;
     margin: 0;
@@ -46,7 +51,12 @@ footer {
 
 footer h3 {
     font-size: 30px;
+    margin: 30px;
     text-align: center;
     text-transform: uppercase;
     font-family: 'Courier New', Courier, monospace;
+}
+
+footer p {
+    margin: 20px;
 }
