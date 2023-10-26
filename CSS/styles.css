@@ -4,9 +4,10 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-h1 {
+.title {
     text-transform: uppercase;
     text-align: center;
     margin-top: 50px;
@@ -49,13 +50,26 @@ section {
     margin: 20px;
 }
 
+.meetTheTeam h2 {
+    font-size: 30px;
+}
+
 .teamMembers {
-    margin: 10px 5px 10px 5px;
+    margin: 20px 5px 10px 5px;
     display: grid;
     grid-template-columns: auto auto auto;
     column-gap: 30px;
     grid-column: 1/3;
     justify-content: space-evenly;
+}
+
+.tutorialPage h2 {
+    font-size: 30px;
+}
+
+.tutorialPage p {
+    font-size: 25px;
+    margin-left: 20px;
 }
 
 footer {
