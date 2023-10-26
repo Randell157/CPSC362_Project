@@ -50,6 +50,14 @@ section {
     margin: 20px;
 }
 
+.mainKaytrix h2{
+    font-size: 30px;
+}
+
+.mainKaytrix p{
+    font-size: 25px;
+}
+
 .meetTheTeam h2 {
     font-size: 30px;
 }
