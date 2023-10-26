@@ -17,6 +17,7 @@ header {
     background-color: lightblue;
     text-transform: uppercase;
     overflow: hidden;
+    border-bottom: 2px solid black;
 }
 
 header ul {
@@ -33,13 +34,29 @@ nav li {
     display: inline-block;
     line-height: 30px;
     color: white;
-    padding: 10px 14px;
+    padding: 10px 20px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: white;
 }
 
 section {
     margin: 20px;
 }
 
+.teamMembers {
+    margin: 10px 5px 10px 5px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 30px;
+    grid-column: 1/3;
+    justify-content: space-evenly;
+}
 
 footer {
     background-color: aquamarine;
@@ -47,6 +64,8 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    border-top: 2px solid black;
+
 }
 
 footer h3 {
