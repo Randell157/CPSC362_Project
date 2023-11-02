@@ -45,7 +45,7 @@ function UserEntersLeftMatrixSize()
         {
             let currBox = document.createElement("INPUT");
             currBox.setAttribute("type", "number");
-            currBox.setAttribute("value", 0);
+            currBox.setAttribute("placeholder", 0);
             currBox.setAttribute("class", "LeftMatVal")
             document.body.appendChild(currBox);
         }
@@ -74,7 +74,7 @@ function UserEntersRightMatrixSize()
         {
             let currBox = document.createElement("INPUT");
             currBox.setAttribute("type", "number");
-            currBox.setAttribute("value", 0);
+            currBox.setAttribute("placeholder", 0);
             currBox.setAttribute("class", "RightMatVal")
             document.body.appendChild(currBox);
         }
@@ -143,20 +143,23 @@ function UserChangesRightMatrixSize()
 //computes the matrices
 function UserComputesMatrix()
 {
+    let currLeftMat = document.getElementsByClassName("LeftMatVal");
 
-    let currLeftMat = document.getElementsByClassName("LeftMatVal")
-
-    for (let i = 0; i < Number(leftMatrix.length); i++)
+    for (let i = 0; i < Number(currLeftMat.length); i++)
     {
-        leftMatrix[i] = currLeftMat[i].getAttribute("value");
+        leftMatrix.push(Number(currLeftMat[i].value));
     }
 
-    let currRightMat = document.getElementsByClassName("RightMatVal")
+    window.alert(leftMatrix);
+
+    let currRightMat = document.getElementsByClassName("RightMatVal");
             
-    for (let i = 0; i < Number(rightMatrix.length); i++)
+    for (let i = 0; i < Number(currRightMat.length); i++)
     {
-        rightMatrix[i] = currRightMat[i].getAttribute("value");
+        rightMatrix.push(Number(currRightMat[i].value));
     }
+
+    window.alert(rightMatrix);
 
     for (let i = 0; i < Number(rightMatrix.length); i++)
     {
@@ -182,7 +185,8 @@ function UserComputesMatrix()
             for (let i = 0; i < Number(currLeftMat.length); i++)
             {
                 let currBox = currLeftMat[i];
-                currBox.setAttribute("value", leftMatrix[i]);
+                currBox.value = leftMatrix[i];
+                currBox.disabled = true;
             }
 
             leftButton.disabled = true;
