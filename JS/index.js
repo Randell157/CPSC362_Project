@@ -250,23 +250,23 @@ function UserComputesMatrix()
     }
     else if (myOp.value == "*")
     {
-        if (leftMatrixColSize == rightMatrixRowSize)
+        if (Number(leftMatrixColSize.value) == Number(rightMatrixRowSize.value))
         {
             let answerMatrix = [];
-            let answerMatrixRowSize = leftMatrixRowSize;
-            let answerMatrixColSize = rightMatrixColSize;
+            let answerMatrixRowSize = Number(leftMatrixRowSize.value);
+            let answerMatrixColSize = Number(rightMatrixColSize.value);
 
             for (let i = 0; i < (answerMatrixRowSize * answerMatrixColSize); i++)
             {
                 let currRow = [];
                 let currCol = [];
                 let currItem = 0;
-                for (let j = (i * leftMatrixRowSize); j < leftMatrixRowSize; j++)
+                for (let j = (i * answerMatrixRowSize); j < answerMatrixRowSize; j++)
                 {
                     currRow.push(leftMatrix[j]);
                 }
 
-                for (let j = i; j < rightMatrixColSize; j += rightMatrixRowSize)
+                for (let j = i; j < Number(rightMatrix.length); j += answerMatrixColSize)
                 {
                     currCol.push(rightMatrix[j]);
                 }
