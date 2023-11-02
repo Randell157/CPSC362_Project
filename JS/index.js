@@ -145,21 +145,52 @@ function UserComputesMatrix()
 {
     let currLeftMat = document.getElementsByClassName("LeftMatVal");
 
-    for (let i = 0; i < Number(currLeftMat.length); i++)
+    if (Number(leftMatrix.length) <= 0)
     {
-        leftMatrix.push(Number(currLeftMat[i].value));
+        for (let i = 0; i < Number(currLeftMat.length); i++)
+        {
+            leftMatrix.push(Number(currLeftMat[i].value));
+        }
+    }
+    else
+    {
+        for (let i = 0; i < Number(currLeftMat.length); i++)
+        {
+            leftMatrix[i] = Number(currLeftMat[i].value);
+        }
     }
 
     let currRightMat = document.getElementsByClassName("RightMatVal");
-            
-    for (let i = 0; i < Number(currRightMat.length); i++)
+    
+    if (Number(rightMatrix.length) <= 0)
     {
-        rightMatrix.push(Number(currRightMat[i].value));
+        for (let i = 0; i < Number(currRightMat.length); i++)
+        {
+            rightMatrix.push(Number(currRightMat[i].value));
+        }
+    }
+    else
+    {
+        for (let i = 0; i < Number(currRightMat.length); i++)
+        {
+            rightMatrix[i] = Number(currRightMat[i].value);
+        }
+    }
+
+    while (Number(prevRightMatrix.length) > 0)
+    {
+        prevRightMatrix.pop();
     }
 
     for (let i = 0; i < Number(rightMatrix.length); i++)
     {
         prevRightMatrix.push(rightMatrix[i]);
+    }
+
+
+    while (Number(prevLeftMatrix.length) > 0)
+    {
+        prevLeftMatrix.pop();
     }
 
     for (let i = 0; i < Number(leftMatrix.length); i++)
@@ -169,7 +200,7 @@ function UserComputesMatrix()
 
     if (myOp.value == "+")
     {
-        if (Number(rightMatrix.length) == Number(leftMatrix.length))
+        if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
         {
             for (let i = 0; i < Number(leftMatrix.length); i++)
             {
@@ -187,10 +218,14 @@ function UserComputesMatrix()
 
             UserChangesRightMatrixSize();
         }
+        else
+        {
+
+        }
     }
     else if (myOp.value == "-")
     {
-        if (Number(rightMatrix.length) == Number(leftMatrix.length))
+        if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
         {
             for (let i = 0; i < Number(leftMatrix.length); i++)
             {
@@ -225,7 +260,6 @@ function UserComputesMatrix()
             {
                 let currRow = [];
                 let currCol = [];
-                let currList = [];
                 let currItem = 0;
                 for (let j = (i * leftMatrixRowSize); j < leftMatrixRowSize; j++)
                 {
@@ -239,18 +273,14 @@ function UserComputesMatrix()
 
                 for (let j = 0; j < Number(currRow.length); j++)
                 {
-                    currList.push(currRow[j] * currCol[j]);
-                }
-
-                for (let j = 0; j < Number(currList.length); j++)
-                {
-                    currItem += currList[j];
+                    currRowAndCol = currRow[j] * currCol[j];
+                    currItem += currRowAndCol
                 }
 
                 answerMatrix.push(currItem);
             }
             
-
+            window.alert(answerMatrix);
 
             while (Number(leftMatrix.length) > 0)
             {
@@ -261,7 +291,19 @@ function UserComputesMatrix()
             {
                 leftMatrix.push(answerMatrix[i])
             }
+
+            leftMatrixRowSize.value = Number(answerMatrixRowSize);
+            leftMatrixColSize.value = Number(answerMatrixColSize);
+
+            for (let i = 0; i < Number(currLeftMat.length); i++)
+            {
+                let currBox = currLeftMat[i];
+                currBox.value = leftMatrix[i];
+                currBox.disabled = true;
+            }
         }
+
+        leftButton.disabled = true;
 
         UserChangesRightMatrixSize();
     }
