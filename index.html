@@ -9,7 +9,7 @@
   <body>
     <h1>Kaytrix</h1>
 
-    <!--testing textboxes and its ability to respond with js script-->
+    <!--textboxes and buttons-->
     <input type="number" id="leftMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
     <input type="number" id="leftMatColSize" min=0 max=10  placeholder=0 maxlength="2">
     <input type="text" id="myOp" placeholder = "+" maxLength="1">
@@ -17,6 +17,7 @@
     <input type="number" id="rightMatColSize" min=0 max=10  placeholder=0 maxlength="2">
     <button id="leftButton" onclick="UserEntersLeftMatrixSize()">Create Left Matrix</button>
     <button id="rightButton" onclick="UserEntersRightMatrixSize()">Create Right Matrix</button>
+    <button id="computeButton" onclick="UserEntersRightMatrixSize()" disabled="true">Compute Matrix</button>
     <!--javascript code, leave it at the bottom of body-->
     <script src="JS/index.js"> 
     </script>

@@ -21,12 +21,16 @@ let leftButton = document.getElementById("leftButton");
 //the right matrix button
 let rightButton = document.getElementById("rightButton");
 
+//the compute button
+let computeButton = document.getElementById("computeButton");
+
 //the left and right matrices
 let leftMatrix = [];
 let rightMatrix = [];
 
-//the answer matrix
-let answerMatrix = [];
+//the previous left and right matrices
+let prevLeftMatrix = [];
+let prevRightMatrix = [];
 
 //creates the left matrix
 function UserEntersLeftMatrixSize()
@@ -112,6 +116,86 @@ function UserChangesRightMatrixSize()
     rightButton.innerHTML = "Create Right Matrix";
 }
 
+function UserComputesMatrix()
+{
+    for (let i = 0; i < Number(rightMatrix.length); i++)
+    {
+        prevRightMatrix.push(rightMatrix[i]);
+    }
+
+    for (let i = 0; i < Number(leftMatrix.length); i++)
+    {
+        prevLeftMatrix.push(leftMatrix[i]);
+    }
+
+    if (myOp.innerHTML == "+")
+    {
+        if (Number(rightMatrix.length) == Number(leftMatrix.length))
+        {
+            for (let i = 0; i < Number(rightMatrix.length); i++)
+            {
+                leftMatrix[i] += rightMatrix[i];
+            }
+
+            while (Number(rightMatrix.length) > 0)
+            {
+                rightMatrix.pop();
+            }
+        }
+    }
+    else if (myOp.innerHTML == "-")
+    {
+        if (Number(rightMatrix.length) == Number(leftMatrix.length))
+        {
+            for (let i = 0; i < Number(rightMatrix.length); i++)
+            {
+                leftMatrix[i] -= rightMatrix[i];
+            }
+
+            while (Number(rightMatrix.length) > 0)
+            {
+                rightMatrix.pop();
+            }
+        }
+    }
+    else if (myOp.innerHTML == "/")
+    {
+
+    }
+    else if (myOp.innerHTML == "*")
+    {
+        if (leftMatrixColSize == rightMatrixRowSize)
+        {
+            for (let i = 0; i < (leftMatrixRowSize * rightMatrixColSize); i++)
+            {
+                let answerMatrix = [];
+                let answerMatrixRowSize = leftMatrixRowSize;
+                let answerMatrixColSize = rightMatrixColSize;
+                let currRow = [];
+                let currCol = [];
+                let currItem = 0;
+                for (let j = (i * leftMatrixColSize); j < leftMatrixRowSize; j++)
+                {
+                    currRow.push(leftMatrix[j]);
+                }
+
+                for (let j = (i * rightMatrixRowSize); j < rightMatrixColSize; j += rightMatrixRowSize)
+                {
+                    currCol.push(rightMatrix[j]);
+                }
+
+                
+            }
+            
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+//test code
 /*
 const leftNum = document.getElementById("leftNum");
 const myOperation = document.getElementById("myOp");
