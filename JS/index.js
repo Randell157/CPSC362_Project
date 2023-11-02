@@ -150,16 +150,12 @@ function UserComputesMatrix()
         leftMatrix.push(Number(currLeftMat[i].value));
     }
 
-    window.alert(leftMatrix);
-
     let currRightMat = document.getElementsByClassName("RightMatVal");
             
     for (let i = 0; i < Number(currRightMat.length); i++)
     {
         rightMatrix.push(Number(currRightMat[i].value));
     }
-
-    window.alert(rightMatrix);
 
     for (let i = 0; i < Number(rightMatrix.length); i++)
     {
@@ -180,8 +176,6 @@ function UserComputesMatrix()
                 leftMatrix[i] += rightMatrix[i];
             }
 
-            window.alert(leftMatrix);
-
             for (let i = 0; i < Number(currLeftMat.length); i++)
             {
                 let currBox = currLeftMat[i];
@@ -198,10 +192,19 @@ function UserComputesMatrix()
     {
         if (Number(rightMatrix.length) == Number(leftMatrix.length))
         {
-            for (let i = 0; i < Number(rightMatrix.length); i++)
+            for (let i = 0; i < Number(leftMatrix.length); i++)
             {
                 leftMatrix[i] -= rightMatrix[i];
             }
+
+            for (let i = 0; i < Number(currLeftMat.length); i++)
+            {
+                let currBox = currLeftMat[i];
+                currBox.value = leftMatrix[i];
+                currBox.disabled = true;
+            }
+
+            leftButton.disabled = true;
 
             UserChangesRightMatrixSize();
         }
