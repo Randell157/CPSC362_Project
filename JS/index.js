@@ -256,50 +256,61 @@ function UserComputesMatrix()
             let answerMatrixRowSize = Number(leftMatrixRowSize.value);
             let answerMatrixColSize = Number(rightMatrixColSize.value);
 
-            for (let i = 0; i < (answerMatrixRowSize * answerMatrixColSize); i++)
-            {
-                let currRow = [];
-                let currCol = [];
-                let currItem = 0;
-                for (let j = (i * answerMatrixRowSize); j < answerMatrixRowSize; j++)
+            for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
+            {   
+                let currRow = []
+                
+                //get current row from the left matrix
+                for (let r = 0; r < Number(leftMatrixColSize.value); i++)
                 {
-                    currRow.push(leftMatrix[j]);
+                    currRow.push(leftMatrix[r]);
                 }
 
-                for (let j = i; j < Number(rightMatrix.length); j += answerMatrixColSize)
+                for (let j = 0; j < Number(rightMatrixColSize.value); j++)
                 {
-                    currCol.push(rightMatrix[j]);
-                }
+                    let currCol = []
 
-                for (let j = 0; j < Number(currRow.length); j++)
-                {
-                    currRowAndCol = currRow[j] * currCol[j];
-                    currItem += currRowAndCol
-                }
+                    //get current col from the right matrix
+                    for (let c = 0; c < 30; c++)
+                    {
 
-                answerMatrix.push(currItem);
+                    }
+                }
             }
-            
-            window.alert(answerMatrix);
 
+            //removes data from left matrix var
             while (Number(leftMatrix.length) > 0)
             {
                 leftMatrix.pop();
             }
 
+            //moves data from answer matrix to the left matrix
             for (let i = 0; i < Number(answerMatrix.length); i++)
             {
                 leftMatrix.push(answerMatrix[i])
             }
 
+            //changes row and col sizes to the answer's sizes
             leftMatrixRowSize.value = Number(answerMatrixRowSize);
             leftMatrixColSize.value = Number(answerMatrixColSize);
 
-            for (let i = 0; i < Number(currLeftMat.length); i++)
+            const currLeftSize = Number(currLeftMat.Length);
+
+            //removes textboxes
+            while (Number(currLeftMat.length) > 0)
             {
-                let currBox = currLeftMat[i];
-                currBox.value = leftMatrix[i];
+                document.body.removeChild(currLeftMat[0]);
+            }
+
+            //adds textboxes
+            for (let i = 0; i < Number(answerMatrix.length); i++)
+            {
+                let currBox = document.createElement("INPUT");
+                currBox.setAttribute("type", "number");
+                currBox.setAttribute("value", leftMatrix[i]);
+                currBox.setAttribute("class", "LeftMatVal")
                 currBox.disabled = true;
+                document.body.appendChild(currBox);
             }
         }
 
