@@ -240,64 +240,26 @@ function UserComputesMatrix()
     if (myOp.value == "+")
     {
         //ADDITION
+        AddMatrix(currLeftMat)
 
-        //check if the sizes of the right and left matrices are the same
-        if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
-        {   
-            //add values from the right matrix and add it to the values in the left matrix
-            for (let i = 0; i < Number(leftMatrix.length); i++)
-            {
-                leftMatrix[i] += rightMatrix[i];
-            }
+        //user can no longer change the sizes of the left button
+        leftButton.disabled = true;
 
-            //change all the values within the left matrix textboxes to reflect the new values
-            //user can no longer change the values in the left matrix
-            for (let i = 0; i < Number(currLeftMat.length); i++)
-            {
-                let currBox = currLeftMat[i];
-                currBox.value = leftMatrix[i];
-                currBox.disabled = true;
-            }
-
-            //user can no longer change the sizes of the left button
-            leftButton.disabled = true;
-
-            //make a new right matrix
-            UserChangesRightMatrixSize();
-        }
-        else
-        {
-            //sizes are not equal
-        }
+        //make a new right matrix
+        UserChangesRightMatrixSize();
     }
     else if (myOp.value == "-")
     {
 
         //SUBTRACTION
+        SubtractMatrix(currLeftMat);
 
-        //check if the sizes in the left and right matrices are equal
-        if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
-        {
-            //subtract the values in the left matrix by the values of the right matrix
-            for (let i = 0; i < Number(leftMatrix.length); i++)
-            {
-                leftMatrix[i] -= rightMatrix[i];
-            }
+        //user can no longer change the sizes of the left matrix
+        leftButton.disabled = true;
 
-            //change the values in the left matrix textboxes to reflect the new values
-            for (let i = 0; i < Number(currLeftMat.length); i++)
-            {
-                let currBox = currLeftMat[i];
-                currBox.value = leftMatrix[i];
-                currBox.disabled = true;
-            }
-
-            //user can no longer change the sizes of the left matrix
-            leftButton.disabled = true;
-
-            //create a new right matrix
-            UserChangesRightMatrixSize();
-        }
+        //create a new right matrix
+        UserChangesRightMatrixSize();
+        
     }
     else if (myOp.value == "/")
     {
@@ -403,6 +365,57 @@ function UserComputesMatrix()
     else
     {
         
+    }
+}
+
+function AddMatrix(currLeftMat)
+{
+    //check if the sizes of the right and left matrices are the same
+    if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
+    {   
+        //add values from the right matrix and add it to the values in the left matrix
+        for (let i = 0; i < Number(leftMatrix.length); i++)
+        {
+            leftMatrix[i] += rightMatrix[i];
+        }
+
+        //change all the values within the left matrix textboxes to reflect the new values
+        //user can no longer change the values in the left matrix
+        for (let i = 0; i < Number(currLeftMat.length); i++)
+        {
+            let currBox = currLeftMat[i];
+            currBox.value = leftMatrix[i];
+            currBox.disabled = true;
+        }
+    }
+    else
+    {
+        //sizes are not equal
+    }
+}
+
+function SubtractMatrix(currLeftMat)
+{
+    //check if the sizes in the left and right matrices are equal
+    if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
+    {
+        //subtract the values in the left matrix by the values of the right matrix
+        for (let i = 0; i < Number(leftMatrix.length); i++)
+        {
+            leftMatrix[i] -= rightMatrix[i];
+        }
+
+        //change the values in the left matrix textboxes to reflect the new values
+        for (let i = 0; i < Number(currLeftMat.length); i++)
+        {
+            let currBox = currLeftMat[i];
+            currBox.value = leftMatrix[i];
+            currBox.disabled = true;
+        }
+    }
+    else
+    {
+        //sizes are not equal
     }
 }
 
