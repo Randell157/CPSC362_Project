@@ -271,91 +271,8 @@ function UserComputesMatrix()
     {
 
         //MULTIPLICATION
-
-        //check if the left matrix col size is equal to the right matrix row size
-        if (Number(leftMatrixColSize.value) == Number(rightMatrixRowSize.value))
-        {
-            //create an answer matrix that the left matrix will be set to by the end of the function
-            let answerMatrix = [];
-            //set the answer matrix's sizes
-            let answerMatrixRowSize = Number(leftMatrixRowSize.value);
-            let answerMatrixColSize = Number(rightMatrixColSize.value);
-
-            //actual multiplication 
-            for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
-            {   
-                //the current row in the left matrix
-                let currRow = []
-
-                //the last point of the row
-                let endPoint = ((i * Number(leftMatrixColSize.value)) + Number(leftMatrixColSize.value))
-
-                //put the values into the current row
-                for (let r = (i * Number(leftMatrixColSize.value)); r < endPoint; r++)
-                {
-                    currRow.push(leftMatrix[r]);
-                }
-
-                //get the columns and mulitply it with the current row
-                for (let j = 0; j < Number(rightMatrixColSize.value); j++)
-                {
-                    //the current col of the right matrix
-                    let currCol = []
-
-                    //put the values into the current col
-                    for (let c = j; c < Number(rightMatrix.length); c += Number(rightMatrixColSize.value))
-                    {                    
-                        currCol.push(rightMatrix[c]);
-                    }
-                    
-                    //the answer that will be put into the answer matrix
-                    let currAns= 0;
-
-                    //get the values from the curr row and the curr col, multiply them together, and then add them to the current answer
-                    for (let a = 0; a < Number(currRow.length); a++)
-                    {
-                        currAns += currRow[a] * currCol[a];
-                    }
-
-                    //put the current answer into the answer matrix
-                    answerMatrix.push(currAns);
-                }
-            }
-
-            //removes data from left matrix variable
-            while (Number(leftMatrix.length) > 0)
-            {
-                leftMatrix.pop();
-            }
-
-            //moves data from answer matrix to the left matrix
-            for (let i = 0; i < Number(answerMatrix.length); i++)
-            {
-                leftMatrix.push(answerMatrix[i])
-            }
-
-            //changes row and col sizes to the answer's sizes
-            leftMatrixRowSize.value = Number(answerMatrixRowSize);
-            leftMatrixColSize.value = Number(answerMatrixColSize);
-
-            //removes textboxes
-            while (Number(currLeftMat.length) > 0)
-            {
-                document.body.removeChild(currLeftMat[0]);
-            }
-
-            //adds textboxes
-            for (let i = 0; i < Number(answerMatrix.length); i++)
-            {
-                let currBox = document.createElement("INPUT");
-                currBox.setAttribute("type", "number");
-                currBox.setAttribute("value", leftMatrix[i]);
-                currBox.setAttribute("class", "LeftMatVal")
-                currBox.disabled = true;
-                document.body.appendChild(currBox);
-            }
-        }
-
+        MultiplyMatrix(currLeftMat);
+        
         //user can not change the left matrix sizes
         leftButton.disabled = true;
         
@@ -416,6 +333,119 @@ function SubtractMatrix(currLeftMat)
     else
     {
         //sizes are not equal
+    }
+}
+
+function MultiplyMatrix(currLeftMat)
+{
+    //check if the left matrix col size is equal to the right matrix row size
+    if (Number(leftMatrixColSize.value) == Number(rightMatrixRowSize.value))
+    {
+        //create an answer matrix that the left matrix will be set to by the end of the function
+        let answerMatrix = [];
+        //set the answer matrix's sizes
+        let answerMatrixRowSize = Number(leftMatrixRowSize.value);
+        let answerMatrixColSize = Number(rightMatrixColSize.value);
+
+        //actual multiplication 
+        for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
+        {   
+            //the current row in the left matrix
+            let currRow = []
+
+            //the last point of the row
+            let endPoint = ((i * Number(leftMatrixColSize.value)) + Number(leftMatrixColSize.value))
+
+            //put the values into the current row
+            for (let r = (i * Number(leftMatrixColSize.value)); r < endPoint; r++)
+            {
+                currRow.push(leftMatrix[r]);
+            }
+
+            //get the columns and mulitply it with the current row
+           for (let j = 0; j < Number(rightMatrixColSize.value); j++)
+            {
+                //the current col of the right matrix
+                let currCol = []
+            
+                //put the values into the current col
+                for (let c = j; c < Number(rightMatrix.length); c += Number(rightMatrixColSize.value))
+                {                    
+                    currCol.push(rightMatrix[c]);
+                }
+                    
+                //the answer that will be put into the answer matrix
+                let currAns= 0;
+
+                //get the values from the curr row and the curr col, multiply them together, and then add them to the current answer
+                for (let a = 0; a < Number(currRow.length); a++)
+                {
+                    currAns += currRow[a] * currCol[a];
+                }
+
+                    //put the current answer into the answer matrix
+                answerMatrix.push(currAns);
+            }
+        }
+
+        //removes data from left matrix variable
+        while (Number(leftMatrix.length) > 0)
+        {
+            leftMatrix.pop();
+        }
+
+        //moves data from answer matrix to the left matrix
+        for (let i = 0; i < Number(answerMatrix.length); i++)
+        {
+            leftMatrix.push(answerMatrix[i])
+        }
+
+        //changes row and col sizes to the answer's sizes
+        leftMatrixRowSize.value = Number(answerMatrixRowSize);
+        leftMatrixColSize.value = Number(answerMatrixColSize);
+
+        //removes textboxes
+        while (Number(currLeftMat.length) > 0)
+        {
+            document.body.removeChild(currLeftMat[0]);
+        }
+
+        //adds textboxes
+        for (let i = 0; i < Number(answerMatrix.length); i++)
+        {
+            let currBox = document.createElement("INPUT");
+            currBox.setAttribute("type", "number");
+            currBox.setAttribute("value", leftMatrix[i]);
+            currBox.setAttribute("class", "LeftMatVal")
+            currBox.disabled = true;
+            document.body.appendChild(currBox);
+        }
+    }
+    else
+    {
+        //sizes are not equal
+    }
+}
+
+function InverseRightMatrix()
+{
+    if (Number(rightMatrixColSize.value) == Number(rightMatrixRowSize.value))
+    {
+        let stateMat = []
+
+        let itrNum = 0
+        for (let i = 0; i < Number(rightMatrix.length); i++, itrNum++)
+        {
+            if (itrNum == (Number(rightMatrixRowSize.value) + 1) || i == 0)
+            {
+                stateMat.push(1);
+                itrNum = 0;
+            }
+            else
+            {
+                stateMat.push(0);
+            }
+        }
     }
 }
 
