@@ -261,7 +261,9 @@ function UserComputesMatrix()
                 let currRow = []
                 
                 //get current row from the left matrix
-                for (let r = 0; r < Number(leftMatrixColSize.value); i++)
+
+                let endPoint = ((i * Number(leftMatrixColSize.value)) + Number(leftMatrixColSize.value))
+                for (let r = (i * Number(leftMatrixColSize.value)); r < endPoint; r++)
                 {
                     currRow.push(leftMatrix[r]);
                 }
@@ -271,10 +273,20 @@ function UserComputesMatrix()
                     let currCol = []
 
                     //get current col from the right matrix
-                    for (let c = 0; c < 30; c++)
-                    {
-
+                    for (let c = j; c < Number(rightMatrix.length); c += Number(rightMatrixColSize.value))
+                    {                    
+                        currCol.push(rightMatrix[c]);
                     }
+
+                    let currAns= 0;
+
+                    for (let a = 0; a < Number(currRow.length); a++)
+                    {
+                        currAns += currRow[a] * currCol[a];
+                    }
+
+                    answerMatrix.push(currAns);
+
                 }
             }
 
@@ -293,8 +305,6 @@ function UserComputesMatrix()
             //changes row and col sizes to the answer's sizes
             leftMatrixRowSize.value = Number(answerMatrixRowSize);
             leftMatrixColSize.value = Number(answerMatrixColSize);
-
-            const currLeftSize = Number(currLeftMat.Length);
 
             //removes textboxes
             while (Number(currLeftMat.length) > 0)
