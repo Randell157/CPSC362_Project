@@ -1,6 +1,7 @@
 //Author: Joshua Yee
 //Date Started: 10/12/23
 //Last Edit: 10/12/23
+//Group: 8
 
 //the size of the left matrix
 const leftMatrixRowSize = document.getElementById("leftMatRowSize");
@@ -265,7 +266,7 @@ function UserComputesMatrix()
     {
 
         //DIVISION
-
+        InverseRightMatrix(currLeftMat); 
     }
     else if (myOp.value == "*")
     {
@@ -433,17 +434,78 @@ function InverseRightMatrix()
     {
         let stateMat = []
 
-        let itrNum = 0
-        for (let i = 0; i < Number(rightMatrix.length); i++, itrNum++)
+        for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
         {
-            if (itrNum == (Number(rightMatrixRowSize.value) + 1) || i == 0)
+            let currRow = [];
+            for (let j = 0; j < Number(rightMatrixColSize.value); j++)
             {
-                stateMat.push(1);
-                itrNum = 0;
+                if (i == j)
+                {
+                    currRow.push(1);
+                }
+                else
+                {
+                    currRow.push(0);
+                }
             }
-            else
+            stateMat.push(currRow);
+        }
+
+        let rightRows = []
+
+        for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
+        {
+            let currRow = [];
+            let rowItr = i * Number(rightMatrixRowSize.value);
+            for (let j = 0; j < Number(rightMatrixColSize.value); j++)
             {
-                stateMat.push(0);
+                currRow.push(rightMatrix[rowItr + j]);
+            }
+            rightRows.push(currRow);
+        }
+
+        //inverse time
+        for (let i = 0; i < Number(rightRows.length); i++)
+        {
+            let divNum = 1;
+
+            for (let j = 0; j < Number(rightRows[i].length); j++)
+            {
+                if (i == j)
+                {
+                    divNum = rightRows[i][j];
+                }
+            }
+
+            for (let j = 0; j < Number(rightRows[i].length); j++)
+            {
+                rightRows[i][j] /= divNum;
+                stateMat[i][j] /= divNum;
+            }
+
+            for (let j = 0; j < Number(rightRows.length); j++)
+            {
+                if (i != j)
+                {
+                    //sub the select row (w/ multiplier) from the current row
+
+                    let multNum = 1;
+
+                    for (let k = 0; k < Number(rightRows[j].length); k++)
+                    {
+                        if (i == k)
+                        {
+                            multNum = rightRows[j][k];
+                        }
+                    }
+
+                    for (let k = 0; k < Number(rightRows[j].length); k++)
+                    {
+                        rightRows[j][k] = rightRows[j][k] - (rightRows[i][k] * multNum);
+                        stateMat[j][k] = stateMat[j][k] - (stateMat[i][k] * multNum);
+                    }
+
+                }
             }
         }
     }
