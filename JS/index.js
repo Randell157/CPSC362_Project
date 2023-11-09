@@ -62,33 +62,36 @@ let dneLabel = document.getElementById("dneLabel");
 function UserEntersLeftMatrixSize()
 {
     //create textboxes for the left matrix
-    for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
+    if ((Number(leftMatrixColSize.value) > 0 && Number(leftMatrixRowSize.value) > 0) && (Number(leftMatrixColSize.value) < 11 && Number(leftMatrixRowSize.value) < 11))
     {
-        for (let j = 0; j < Number(leftMatrixColSize.value); j++)
+        for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
         {
-            let currBox = document.createElement("INPUT");
-            currBox.setAttribute("type", "number");
-            currBox.setAttribute("placeholder", 0);
-            currBox.setAttribute("class", "LeftMatVal")
-            document.body.appendChild(currBox);
+            for (let j = 0; j < Number(leftMatrixColSize.value); j++)
+            {
+                let currBox = document.createElement("INPUT");
+                currBox.setAttribute("type", "number");
+                currBox.setAttribute("placeholder", 0);
+                currBox.setAttribute("class", "LeftMatVal")
+                document.body.appendChild(currBox);
+            }
         }
-    }
-    //user can no longer change the left matrix's sizes
-    leftMatrixColSize.disabled = true;
-    leftMatrixRowSize.disabled = true;
+        //user can no longer change the left matrix's sizes
+        leftMatrixColSize.disabled = true;
+        leftMatrixRowSize.disabled = true;
 
-    //change the left matrix button so that it allows users to change the left matrix's sizes
-    leftButton.setAttribute("onclick", "UserChangesLeftMatrixSize()");
-    leftButton.innerHTML = "Change Left Size";
+        //change the left matrix button so that it allows users to change the left matrix's sizes
+        leftButton.setAttribute("onclick", "UserChangesLeftMatrixSize()");
+        leftButton.innerHTML = "Change Left Size";
 
-    //left matrix is ready for computation
-    leftMatReady = true;
+        //left matrix is ready for computation
+        leftMatReady = true;
 
-    //check if the left and right matrices are ready
-    //if so, allow computation
-    if (leftMatReady && rightMatReady)
-    {
-        computeButton.disabled = false;
+        //check if the left and right matrices are ready
+        //if so, allow computation
+        if (leftMatReady && rightMatReady)
+        {
+            computeButton.disabled = false;
+        }
     }
 }
 
@@ -96,6 +99,7 @@ function UserEntersLeftMatrixSize()
 function UserEntersRightMatrixSize()
 {
     //creates the textboxes for the right matrix
+    if ((Number(rightMatrixColSize.value) > 0 && Number(rightMatrixRowSize.value) > 0) && (Number(rightMatrixColSize.value) < 11 && Number(rightMatrixRowSize.value) < 11))
     for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
     {
         for (let j = 0; j < Number(rightMatrixColSize.value); j++)
@@ -737,5 +741,15 @@ function NextEquation()
 
 function ResetValues()
 {
-    
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+    UserChangesLeftMatrixSize();
+    UserChangesRightMatrixSize();
+    leftMatrixColSize.value = 0
+    leftMatrixRowSize.value = 0;
+    rightMatrixRowSize.value = 0;
+    rightMatrixColSize.value = 0;
+    leftButton.disabled = false;
+    rightButton.disabled = false;
+    myOp.innerHTML = "+";
 }
