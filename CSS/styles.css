@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-    list-style: none;
+    /* list-style: none; */
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -23,7 +23,6 @@ header {
 
 header ul {
     text-align: right;
-
 }
 
 nav {
@@ -50,11 +49,11 @@ section {
     margin: 20px;
 }
 
-.mainKaytrix h2{
+.mainKaytrix h2 {
     font-size: 30px;
 }
 
-.mainKaytrix p{
+.mainKaytrix p {
     font-size: 25px;
 }
 
@@ -75,9 +74,16 @@ section {
     font-size: 30px;
 }
 
-.tutorialPage p {
+.tutorialPage p,
+li,
+ol,
+h3 {
     font-size: 25px;
     margin-left: 20px;
+}
+
+ol li {
+    text-indent: 50px;
 }
 
 footer {
