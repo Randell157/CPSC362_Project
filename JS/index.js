@@ -16,6 +16,12 @@ const maxSize = 10;
 //the smallest size a matrix can be
 const minSize = 1;
 
+let prevRightRowSize;
+let prevRightColSize;
+
+let prevLeftRowSize;
+let prevLeftColSize;
+
 //the left matrix button
 let leftButton = document.getElementById("leftButton");
 
@@ -25,6 +31,12 @@ let rightButton = document.getElementById("rightButton");
 //the compute button
 let computeButton = document.getElementById("computeButton");
 
+//the previous button
+let prevButton = document.getElementById("prevButton");
+
+//the next button
+let nextButton = document.getElementById("nextButton");
+
 //the left and right matrices
 let leftMatrix = [];
 let rightMatrix = [];
@@ -33,9 +45,18 @@ let rightMatrix = [];
 let prevLeftMatrix = [];
 let prevRightMatrix = [];
 
+//the next matrix
+let nextLeftMatrix = [];
+
+let nextLeftRowSize;
+let nextLeftColSize;
+
 //check if the matrices are ready to go
 let leftMatReady = false;
 let rightMatReady = false;
+
+//the dne label
+let dneLabel = document.getElementById("dneLabel");
 
 //creates the left matrix
 function UserEntersLeftMatrixSize()
@@ -171,6 +192,8 @@ function UserChangesRightMatrixSize()
 //computes the matrices
 function UserComputesMatrix()
 {
+    prevButton.disabled = false;
+
     //get the textboxes connected to the left matrix
     let currLeftMat = document.getElementsByClassName("LeftMatVal");
 
@@ -192,6 +215,9 @@ function UserComputesMatrix()
         }
     }
 
+    prevLeftColSize = Number(leftMatrixColSize.value);
+    prevLeftRowSize = Number(leftMatrixRowSize.value);
+
     //get the textboxes connected to the right matrix
     let currRightMat = document.getElementsByClassName("RightMatVal");
     
@@ -212,6 +238,9 @@ function UserComputesMatrix()
             rightMatrix[i] = Number(currRightMat[i].value);
         }
     }
+
+    prevRightColSize = Number(rightMatrixColSize.value);
+    prevRightRowSize = Number(rightMatrixRowSize.value);
 
     //check if the previous right matrix has any values, if so remove them
     while (Number(prevRightMatrix.length) > 0)
@@ -266,7 +295,14 @@ function UserComputesMatrix()
     {
 
         //DIVISION
-        InverseRightMatrix(currLeftMat); 
+        InverseRightMatrix();
+        MultiplyMatrix(currLeftMat);
+
+        //user can not change the left matrix sizes
+        leftButton.disabled = true;
+        
+        //create a new right matrix
+        UserChangesRightMatrixSize();
     }
     else if (myOp.value == "*")
     {
@@ -282,7 +318,7 @@ function UserComputesMatrix()
     }
     else
     {
-        
+        DoesNotExist("not an operation");
     }
 }
 
@@ -309,6 +345,7 @@ function AddMatrix(currLeftMat)
     else
     {
         //sizes are not equal
+        DoesNotExist("sizes are not equal");
     }
 }
 
@@ -334,6 +371,7 @@ function SubtractMatrix(currLeftMat)
     else
     {
         //sizes are not equal
+        DoesNotExist("sizes are not equal");
     }
 }
 
@@ -384,7 +422,7 @@ function MultiplyMatrix(currLeftMat)
                     currAns += currRow[a] * currCol[a];
                 }
 
-                    //put the current answer into the answer matrix
+                //put the current answer into the answer matrix
                 answerMatrix.push(currAns);
             }
         }
@@ -425,6 +463,7 @@ function MultiplyMatrix(currLeftMat)
     else
     {
         //sizes are not equal
+        DoesNotExist("sizes are not equal");
     }
 }
 
@@ -479,8 +518,17 @@ function InverseRightMatrix()
 
             for (let j = 0; j < Number(rightRows[i].length); j++)
             {
-                rightRows[i][j] /= divNum;
-                stateMat[i][j] /= divNum;
+                if (divNum != 0)
+                {
+                    rightRows[i][j] /= divNum;
+                    stateMat[i][j] /= divNum;
+                }
+                else
+                {
+                    DoesNotExist("right matrix can not be inversed");
+                    return;
+                }
+
             }
 
             for (let j = 0; j < Number(rightRows.length); j++)
@@ -508,40 +556,186 @@ function InverseRightMatrix()
                 }
             }
         }
+
+        let rightItr = 0
+
+        for (let i = 0; i < Number(stateMat.length); i++)
+        {
+            for (let j = 0; j < Number(stateMat.length); j++)
+            {
+                rightMatrix[rightItr] = stateMat[i][j];
+                rightItr++;
+            }
+        }
     }
 }
 
-//test code
-/*
-const leftNum = document.getElementById("leftNum");
-const myOperation = document.getElementById("myOp");
-const rightNum = document.getElementById("rightNum");
-let myOut = document.getElementById("myOut");
-
-function add()
+function DoesNotExist(myMes)
 {
-    let myAnswer = 0;
+    UserChangesLeftMatrixSize();
+    UserChangesRightMatrixSize();
+    rightMatrixColSize.disabled = true;
+    rightMatrixRowSize.disabled = true;
+    leftMatrixColSize.disabled = true;
+    leftMatrixRowSize.disabled = true;
+    leftButton.disabled = true;
+    rightButton.disabled = true;
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+    dneLabel.innerText = "DNE: " + myMes;
+}
 
-    if (myOperation.value == "+")
+function PreviousEquation()
+{
+    if (Number(nextLeftMatrix.length) == 0)
     {
-        myAnswer = Number(rightNum.value) + Number(leftNum.value);
-    }
-    else if (myOperation.value == "-")
-    {
-        myAnswer = Number(rightNum.value) - Number(leftNum.value);
-    }
-    else if (myOperation.value == "/")
-    {
-        myAnswer = Number(rightNum.value) / Number(leftNum.value);
-    }
-    else if (myOperation.value == "*")
-    {
-        myAnswer = Number(rightNum.value) * Number(leftNum.value);
+        for (let i = 0; i < Number(leftMatrix.length); i++)
+        {
+            nextLeftMatrix.push(leftMatrix[i]);
+        }
     }
     else
     {
-        myAnswer = "ERROR";
+        for (let i = 0; i < Number(leftMatrix.length); i++)
+        {
+            nextLeftMatrix[i] = leftMatrix[i];
+        }
     }
-    myOut.innerHTML = String(myAnswer);
+
+    UserChangesLeftMatrixSize();
+    UserChangesRightMatrixSize();
+    rightMatrixColSize.disabled = true;
+    rightMatrixRowSize.disabled = true;
+    leftMatrixColSize.disabled = true;
+    leftMatrixRowSize.disabled = true;
+    leftButton.disabled = true;
+    rightButton.disabled = true;
+
+    nextLeftRowSize = Number(leftMatrixRowSize.value);
+    nextLeftColSize = Number(leftMatrixColSize.value);
+
+    while (Number(leftMatrix.length) > 0)
+    {
+        leftMatrix.pop();
+    }
+
+    for (let i = 0; i < Number(prevLeftMatrix.length); i++)
+    {
+        leftMatrix.push(prevLeftMatrix[i]);
+    }
+
+    while (Number(rightMatrix.length) > 0)
+    {
+        rightMatrix.pop();
+    }
+
+    for (let i = 0; i < Number(prevRightMatrix.length); i++)
+    {
+        rightMatrix.push(prevRightMatrix[i]);
+    }
+
+    leftMatrixRowSize.value = prevLeftRowSize;
+    leftMatrixColSize.value = prevLeftColSize;
+
+    rightMatrixRowSize.value = prevRightRowSize;
+    rightMatrixColSize.value = prevRightColSize;
+
+    //create textboxes for the left matrix
+    let leftItr = 0;
+    for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
+    {
+        for (let j = 0; j < Number(leftMatrixColSize.value); j++)
+        {
+            let currBox = document.createElement("INPUT");
+            currBox.setAttribute("type", "number");
+            currBox.setAttribute("value", leftMatrix[leftItr]);
+            currBox.setAttribute("class", "LeftMatVal");
+            currBox.disabled = true;
+            document.body.appendChild(currBox);
+            leftItr++;
+        }
+    }
+
+    //create textboxes for the right matrix
+    let rightItr = 0;
+    for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
+    {
+        for (let j = 0; j < Number(rightMatrixColSize.value); j++)
+        {
+            let currBox = document.createElement("INPUT");
+            currBox.setAttribute("type", "number");
+            currBox.setAttribute("value", rightMatrix[rightItr]);
+            currBox.setAttribute("class", "RightMatVal");
+            currBox.disabled = true;
+            document.body.appendChild(currBox);
+            rightItr++;
+        }
+    }
+
+    prevButton.disabled = true;
+    nextButton.disabled = false;
+
+    alert(rightMatrix);
+    alert(leftMatrix);
 }
-*/
+
+function NextEquation()
+{
+    UserChangesLeftMatrixSize();
+    UserChangesRightMatrixSize();
+    leftMatrixColSize.disabled = true;
+    leftMatrixRowSize.disabled = true;
+    leftButton.disabled = true;
+    rightButton.disabled = false;
+    leftMatReady = true;
+
+    while (Number(leftMatrix.length) > 0)
+    {
+        leftMatrix.pop();
+    }
+
+    for (let i = 0; i < Number(nextLeftMatrix.length); i++)
+    {
+        leftMatrix.push(nextLeftMatrix[i]);
+    }
+
+    while (Number(nextLeftMatrix.length) > 0)
+    {
+        nextLeftMatrix.pop();
+    }
+
+    while (Number(rightMatrix.length) > 0)
+    {
+        rightMatrix.pop();
+    }
+
+    leftMatrixRowSize.value = nextLeftRowSize;
+    leftMatrixColSize.value = nextLeftColSize;
+
+    //create textboxes for the left matrix
+    let leftItr = 0;
+    for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
+    {
+        for (let j = 0; j < Number(leftMatrixColSize.value); j++)
+        {
+            let currBox = document.createElement("INPUT");
+            currBox.setAttribute("type", "number");
+            currBox.setAttribute("value", leftMatrix[leftItr]);
+            currBox.setAttribute("class", "LeftMatVal");
+            currBox.disabled = true;
+            document.body.appendChild(currBox);
+            leftItr++;
+        }
+    }
+
+    nextButton.disabled = true;
+    prevButton.disabled = false;
+
+    alert(rightMatrix);
+    alert(leftMatrix);
+}
+
+function ResetValues()
+{
+    
+}
