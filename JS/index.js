@@ -100,35 +100,38 @@ function UserEntersRightMatrixSize()
 {
     //creates the textboxes for the right matrix
     if ((Number(rightMatrixColSize.value) > 0 && Number(rightMatrixRowSize.value) > 0) && (Number(rightMatrixColSize.value) < 11 && Number(rightMatrixRowSize.value) < 11))
-    for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
     {
-        for (let j = 0; j < Number(rightMatrixColSize.value); j++)
+        for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
         {
-            let currBox = document.createElement("INPUT");
-            currBox.setAttribute("type", "number");
-            currBox.setAttribute("placeholder", 0);
-            currBox.setAttribute("class", "RightMatVal")
-            document.body.appendChild(currBox);
+            for (let j = 0; j < Number(rightMatrixColSize.value); j++)
+            {
+                let currBox = document.createElement("INPUT");
+                currBox.setAttribute("type", "number");
+                currBox.setAttribute("placeholder", 0);
+                currBox.setAttribute("class", "RightMatVal")
+                document.body.appendChild(currBox);
+            }
+        }
+
+        //user can no longer change the right matrix's sizes
+        rightMatrixColSize.disabled = true;
+        rightMatrixRowSize.disabled = true;
+
+        //changes the right matrix button so that it would allow the user to go back and change the sizes
+        rightButton.setAttribute("onclick", "UserChangesRightMatrixSize()");
+        rightButton.innerHTML = "Change Right Size";
+
+        //the right matrix is ready to be computed
+        rightMatReady = true;
+
+        //check if the right and left matrices are ready to be computed
+        //if so, allow computation
+        if (rightMatReady && leftMatReady)
+        {
+            computeButton.disabled = false;
         }
     }
-
-    //user can no longer change the right matrix's sizes
-    rightMatrixColSize.disabled = true;
-    rightMatrixRowSize.disabled = true;
-
-    //changes the right matrix button so that it would allow the user to go back and change the sizes
-    rightButton.setAttribute("onclick", "UserChangesRightMatrixSize()");
-    rightButton.innerHTML = "Change Right Size";
-
-    //the right matrix is ready to be computed
-    rightMatReady = true;
-
-    //check if the right and left matrices are ready to be computed
-    //if so, allow computation
-    if (rightMatReady && leftMatReady)
-    {
-        computeButton.disabled = false;
-    }
+    
 }
 
 //changes the left matrix
