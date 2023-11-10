@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    /* list-style: none; */
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+    background-color: lightblue;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-bottom: 2px solid black;
+}
+
+header ul {
+    text-align: right;
+}
+
+nav {
+    overflow: hidden;
+    font-weight: bold;
+}
+
+nav li {
+    display: inline-block;
+    line-height: 30px;
+    color: white;
+    padding: 10px 20px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: white;
+}
+
+section {
+    margin: 20px;
+}
+
+.mainKaytrix h2 {
+    font-size: 30px;
+}
+
+.mainKaytrix p {
+    font-size: 25px;
+}
+
+.meetTheTeam h2 {
+    font-size: 30px;
+}
+
+.teamMembers {
+    margin: 20px 5px 10px 5px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 30px;
+    grid-column: 1/3;
+    justify-content: space-evenly;
+}
+
+.tutorialPage h2 {
+    font-size: 30px;
+}
+
+.tutorialPage p,
+li,
+ol,
+h3 {
+    font-size: 25px;
+    margin-left: 20px;
+}
+
+ol li {
+    text-indent: 50px;
+}
+
+footer {
+    background-color: aquamarine;
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 2px solid black;
+
+}
+
+footer h3 {
+    font-size: 30px;
+    margin: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+footer p {
+    margin: 20px;
+}
