@@ -61,9 +61,10 @@ let dneLabel = document.getElementById("dneLabel");
 //creates the left matrix
 function UserEntersLeftMatrixSize()
 {
-    //create textboxes for the left matrix
+    //check if the sizes are valid
     if ((Number(leftMatrixColSize.value) > 0 && Number(leftMatrixRowSize.value) > 0) && (Number(leftMatrixColSize.value) < 11 && Number(leftMatrixRowSize.value) < 11))
     {
+        //create textboxes for the left matrix
         for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
         {
             for (let j = 0; j < Number(leftMatrixColSize.value); j++)
@@ -98,9 +99,10 @@ function UserEntersLeftMatrixSize()
 //creates the right matrix
 function UserEntersRightMatrixSize()
 {
-    //creates the textboxes for the right matrix
+    //check if the sizes are valid
     if ((Number(rightMatrixColSize.value) > 0 && Number(rightMatrixRowSize.value) > 0) && (Number(rightMatrixColSize.value) < 11 && Number(rightMatrixRowSize.value) < 11))
     {
+        //creates the textboxes for the right matrix
         for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
         {
             for (let j = 0; j < Number(rightMatrixColSize.value); j++)
@@ -474,12 +476,14 @@ function MultiplyMatrix(currLeftMat)
     }
 }
 
+//inverses the right matrix
 function InverseRightMatrix()
 {
+    //check if the col size is equal to the row size
     if (Number(rightMatrixColSize.value) == Number(rightMatrixRowSize.value))
     {
+        //create a state array (that diagonal thing)
         let stateMat = []
-
         for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
         {
             let currRow = [];
@@ -497,8 +501,8 @@ function InverseRightMatrix()
             stateMat.push(currRow);
         }
 
+        //split the right matrix into rows for simplicity
         let rightRows = []
-
         for (let i = 0; i < Number(rightMatrixRowSize.value); i++)
         {
             let currRow = [];
@@ -513,8 +517,10 @@ function InverseRightMatrix()
         //inverse time
         for (let i = 0; i < Number(rightRows.length); i++)
         {
-            let divNum = 1;
+            //divide the row
 
+            //get the number to divide the row with
+            let divNum = 1;
             for (let j = 0; j < Number(rightRows[i].length); j++)
             {
                 if (i == j)
@@ -523,8 +529,10 @@ function InverseRightMatrix()
                 }
             }
 
+            //divide every value in the row with the divNum
             for (let j = 0; j < Number(rightRows[i].length); j++)
             {
+                //don't divide by zero or else >:(
                 if (divNum != 0)
                 {
                     rightRows[i][j] /= divNum;
@@ -538,14 +546,14 @@ function InverseRightMatrix()
 
             }
 
+            //subtract the select row (w/ multiplier) from all the other row
             for (let j = 0; j < Number(rightRows.length); j++)
             {
+                //make sure that the row that you get is different from the select row
                 if (i != j)
                 {
-                    //sub the select row (w/ multiplier) from the current row
-
+                    //get the number to multiply the select row with
                     let multNum = 1;
-
                     for (let k = 0; k < Number(rightRows[j].length); k++)
                     {
                         if (i == k)
@@ -554,6 +562,7 @@ function InverseRightMatrix()
                         }
                     }
 
+                    //go through the row and subtract it by the select row times the multNum
                     for (let k = 0; k < Number(rightRows[j].length); k++)
                     {
                         rightRows[j][k] = rightRows[j][k] - (rightRows[i][k] * multNum);
@@ -564,8 +573,8 @@ function InverseRightMatrix()
             }
         }
 
+        //change the right matrix to the state matrix
         let rightItr = 0
-
         for (let i = 0; i < Number(stateMat.length); i++)
         {
             for (let j = 0; j < Number(stateMat.length); j++)
@@ -575,8 +584,13 @@ function InverseRightMatrix()
             }
         }
     }
+    else
+    {
+        DoesNotExist("right matrix can not be inversed");
+    }
 }
 
+//if the calculation is not possible
 function DoesNotExist(myMes)
 {
     UserChangesLeftMatrixSize();
@@ -592,8 +606,10 @@ function DoesNotExist(myMes)
     dneLabel.innerText = "DNE: " + myMes;
 }
 
+//view the previous equation
 function PreviousEquation()
 {
+    //place all the values from the left matrix into the next left matrix (since we are going back)
     if (Number(nextLeftMatrix.length) == 0)
     {
         for (let i = 0; i < Number(leftMatrix.length); i++)
@@ -609,6 +625,7 @@ function PreviousEquation()
         }
     }
 
+    //remove all the textboxes and disable all of the buttons 
     UserChangesLeftMatrixSize();
     UserChangesRightMatrixSize();
     rightMatrixColSize.disabled = true;
@@ -618,29 +635,35 @@ function PreviousEquation()
     leftButton.disabled = true;
     rightButton.disabled = true;
 
+    //set the sizes of the next matrix to equal the current left matrix sizes
     nextLeftRowSize = Number(leftMatrixRowSize.value);
     nextLeftColSize = Number(leftMatrixColSize.value);
 
+    //remove all the values from the left matrix
     while (Number(leftMatrix.length) > 0)
     {
         leftMatrix.pop();
     }
 
+    //put all of the values from the previous left matrix into the current left matrix
     for (let i = 0; i < Number(prevLeftMatrix.length); i++)
     {
         leftMatrix.push(prevLeftMatrix[i]);
     }
 
+    //remove all the values from the right matrix
     while (Number(rightMatrix.length) > 0)
     {
         rightMatrix.pop();
     }
 
+    //put all of the values from the previous right matrix into the current right matrix
     for (let i = 0; i < Number(prevRightMatrix.length); i++)
     {
         rightMatrix.push(prevRightMatrix[i]);
     }
 
+    //adjust all of the sizes to equal the new sizes
     leftMatrixRowSize.value = prevLeftRowSize;
     leftMatrixColSize.value = prevLeftColSize;
 
@@ -679,15 +702,15 @@ function PreviousEquation()
         }
     }
 
+    //user can go forward but not back
     prevButton.disabled = true;
     nextButton.disabled = false;
-
-    alert(rightMatrix);
-    alert(leftMatrix);
 }
 
+//view the next (current) equation
 function NextEquation()
 {
+    //remove the textboxes and disabled all the buttons except the right button
     UserChangesLeftMatrixSize();
     UserChangesRightMatrixSize();
     leftMatrixColSize.disabled = true;
@@ -696,30 +719,35 @@ function NextEquation()
     rightButton.disabled = false;
     leftMatReady = true;
 
+    //remove all the previous values from the left matrix
     while (Number(leftMatrix.length) > 0)
     {
         leftMatrix.pop();
     }
 
+    //add all the next (current) values into the left matrix
     for (let i = 0; i < Number(nextLeftMatrix.length); i++)
     {
         leftMatrix.push(nextLeftMatrix[i]);
     }
 
+    //remove all the values in the next left matrix
     while (Number(nextLeftMatrix.length) > 0)
     {
         nextLeftMatrix.pop();
     }
 
+    //remove all the previous values from the rigth matrix
     while (Number(rightMatrix.length) > 0)
     {
         rightMatrix.pop();
     }
 
+    //set the left matrix sizes to the next (current) sizes
     leftMatrixRowSize.value = nextLeftRowSize;
     leftMatrixColSize.value = nextLeftColSize;
 
-    //create textboxes for the left matrix
+    //create textboxes for the left matrix with the current values
     let leftItr = 0;
     for (let i = 0; i < Number(leftMatrixRowSize.value); i++)
     {
@@ -735,13 +763,12 @@ function NextEquation()
         }
     }
 
+    //user can go back but not forwards
     nextButton.disabled = true;
     prevButton.disabled = false;
-
-    alert(rightMatrix);
-    alert(leftMatrix);
 }
 
+//go back to the very beginning
 function ResetValues()
 {
     prevButton.disabled = true;
