@@ -781,5 +781,5 @@ function ResetValues()
     rightMatrixColSize.value = 0;
     leftButton.disabled = false;
     rightButton.disabled = false;
-    myOp.innerHTML = "+";
+    dneLabel.innerHTML = "";
 }
