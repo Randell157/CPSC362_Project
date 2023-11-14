@@ -32,27 +32,38 @@
       </p>
     </section>
     <!--textboxes and buttons-->
-    <input type="number" id="leftMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
-    <input type="number" id="leftMatColSize" min=0 max=10 placeholder=0 maxlength="2">
-    <!-- <input type="text" id="myOp" placeholder="+" maxLength="1"> -->
-    <select name="myOp" id="myOp">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
-    <input type="number" id="rightMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
-    <input type="number" id="rightMatColSize" min=0 max=10 placeholder=0 maxlength="2">
-    <button id="leftButton" onclick="UserEntersLeftMatrixSize()">Create Left Matrix</button>
-    <button id="rightButton" onclick="UserEntersRightMatrixSize()">Create Right Matrix</button>
-    <button id="computeButton" onclick="UserComputesMatrix()" disabled="true">Compute Matrix</button>
-    <button id="prevButton" onclick="PreviousEquation()" disabled="true">Previous</button>
-    <button id="nextButton" onclick="NextEquation()" disabled="true">Next</button>
-    <button id="resetButton" onclick="ResetValues()">Reset</button>
-    <label id="dneLabel"></label>
+    <div class="matrixCalculator">
+      <input type="number" id="leftMatRowSize" min="0" max="10" placeholder="0" maxlength="2" />
+      <input type="number" id="leftMatColSize" min="0" max="10" placeholder="0" maxlength="2" />
+      <select name="myOp" id="myOp">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" id="rightMatRowSize" min="0" max="10" placeholder="0" maxlength="2" />
+      <input type="number" id="rightMatColSize" min="0" max="10" placeholder="0" maxlength="2" />
+      <button id="leftButton" onclick="UserEntersLeftMatrixSize()">
+        Create Left Matrix
+      </button>
+      <button id="rightButton" onclick="UserEntersRightMatrixSize()">
+        Create Right Matrix
+      </button>
+      <button id="computeButton" onclick="UserComputesMatrix()" disabled="true">
+        Compute Matrix
+      </button>
+      <button id="prevButton" onclick="PreviousEquation()" disabled="true">
+        Previous
+      </button>
+      <button id="nextButton" onclick="NextEquation()" disabled="true">
+        Next
+      </button>
+      <button id="resetButton" onclick="ResetValues()">Reset</button>
+      <label id="dneLabel"></label>
+    </div>
+
     <!--javascript code, leave it at the bottom of body-->
-    <script src="JS/index.js">
-    </script>
+    <script src="JS/index.js"></script>
     <footer>
       <h3>Kaytrix</h3>
       <p>This will be the footer of the matrix</p>

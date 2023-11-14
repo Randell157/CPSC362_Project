@@ -66,33 +66,32 @@ section {
 }
 
 /* Matrix calculator*/
+.matrixCalculator {
+  display: grid;
+  grid-template-columns: repeat(8, 100px);
+  grid-auto-rows: 50px;
+}
+
 #leftMatRowSize,
 #leftMatColSize {
-  /* display: grid; */
+
 }
 
-#myOp {
-}
+#myOp {}
 
 #rightMatRowSize,
-#rightMatColSize {
-}
+#rightMatColSize {}
 
 #leftButton,
-#rightButton {
-}
+#rightButton {}
 
-#computeButton {
-}
+#computeButton {}
 
-#prevButton {
-}
+#prevButton {}
 
-#nextButton {
-}
+#nextButton {}
 
-#resetButton {
-}
+#resetButton {}
 
 /* Team Members */
 .teamMembers {
