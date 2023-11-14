@@ -34,7 +34,13 @@
     <!--textboxes and buttons-->
     <input type="number" id="leftMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
     <input type="number" id="leftMatColSize" min=0 max=10 placeholder=0 maxlength="2">
-    <input type="text" id="myOp" placeholder="+" maxLength="1">
+    <!-- <input type="text" id="myOp" placeholder="+" maxLength="1"> -->
+    <select name="myOp" id="myOp">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
     <input type="number" id="rightMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
     <input type="number" id="rightMatColSize" min=0 max=10 placeholder=0 maxlength="2">
     <button id="leftButton" onclick="UserEntersLeftMatrixSize()">Create Left Matrix</button>
