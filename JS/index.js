@@ -146,9 +146,9 @@ function UserChangesLeftMatrixSize()
     
     //go through the left matrix and remove the textboxes
     //also remove the values in the left matrix variable
-    for (let i = 0; i < Number(listSize); i++)
+    for (let i = 0; i < Number(listSize) - 1; i++)
     {
-        document.body.removeChild(leftMatList[0]);
+        document.body.removeChild(leftMatList[1]);
         leftMatrix.pop();
     }
 
@@ -177,9 +177,9 @@ function UserChangesRightMatrixSize()
     
     //remove the right matrix's textboxes
     //remove the values within the right matrix variable
-    for (let i = 0; i < Number(listSize); i++)
+    for (let i = 0; i < Number(listSize) - 1; i++)
     {
-        document.body.removeChild(rightMatList[0]);
+        document.body.removeChild(rightMatList[1]);
         rightMatrix.pop();
     }
 
@@ -210,7 +210,7 @@ function UserComputesMatrix()
     if (Number(leftMatrix.length) <= 0)
     {
         //take the values from the textboxes and put them into the left matrix variable
-        for (let i = 0; i < Number(currLeftMat.length); i++)
+        for (let i = 1; i < Number(currLeftMat.length); i++)
         {
             leftMatrix.push(Number(currLeftMat[i].value));
         }
@@ -218,9 +218,9 @@ function UserComputesMatrix()
     else
     {
         //take the values in the left matrix variable and set them to be equal to the values in the textboxes
-        for (let i = 0; i < Number(currLeftMat.length); i++)
+        for (let i = 1; i < Number(currLeftMat.length); i++)
         {
-            leftMatrix[i] = Number(currLeftMat[i].value);
+            leftMatrix[i - 1] = Number(currLeftMat[i].value);
         }
     }
 
@@ -234,7 +234,7 @@ function UserComputesMatrix()
     if (Number(rightMatrix.length) <= 0)
     {
         //take the values from the textboxes and put them into the right matrix variable
-        for (let i = 0; i < Number(currRightMat.length); i++)
+        for (let i = 1; i < Number(currRightMat.length); i++)
         {
             rightMatrix.push(Number(currRightMat[i].value));
         }
@@ -242,9 +242,9 @@ function UserComputesMatrix()
     else
     {
         //take the values from the right matrix variable and set them to be equal to the values in the textboxes
-        for (let i = 0; i < Number(currRightMat.length); i++)
+        for (let i = 1; i < Number(currRightMat.length); i++)
         {
-            rightMatrix[i] = Number(currRightMat[i].value);
+            rightMatrix[i - 1] = Number(currRightMat[i].value);
         }
     }
 
@@ -337,6 +337,8 @@ function AddMatrix(currLeftMat)
     if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
     {   
         //add values from the right matrix and add it to the values in the left matrix
+        window.alert(leftMatrix);
+        window.alert(rightMatrix);
         for (let i = 0; i < Number(leftMatrix.length); i++)
         {
             leftMatrix[i] += rightMatrix[i];
@@ -344,10 +346,10 @@ function AddMatrix(currLeftMat)
 
         //change all the values within the left matrix textboxes to reflect the new values
         //user can no longer change the values in the left matrix
-        for (let i = 0; i < Number(currLeftMat.length); i++)
+        for (let i = 1; i < Number(currLeftMat.length); i++)
         {
             let currBox = currLeftMat[i];
-            currBox.value = leftMatrix[i];
+            currBox.value = leftMatrix[i - 1];
             currBox.disabled = true;
         }
     }
@@ -370,10 +372,10 @@ function SubtractMatrix(currLeftMat)
         }
 
         //change the values in the left matrix textboxes to reflect the new values
-        for (let i = 0; i < Number(currLeftMat.length); i++)
+        for (let i = 1; i < Number(currLeftMat.length); i++)
         {
             let currBox = currLeftMat[i];
-            currBox.value = leftMatrix[i];
+            currBox.value = leftMatrix[i - 1];
             currBox.disabled = true;
         }
     }
@@ -453,9 +455,9 @@ function MultiplyMatrix(currLeftMat)
         leftMatrixColSize.value = Number(answerMatrixColSize);
 
         //removes textboxes
-        while (Number(currLeftMat.length) > 0)
+        while (Number(currLeftMat.length) > 1)
         {
-            document.body.removeChild(currLeftMat[0]);
+            document.body.removeChild(currLeftMat[1]);
         }
 
         //adds textboxes
