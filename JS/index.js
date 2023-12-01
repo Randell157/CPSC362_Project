@@ -58,6 +58,12 @@ let rightMatReady = false;
 //the dne label
 let dneLabel = document.getElementById("dneLabel");
 
+//the group of right matrix textboxes
+let rightMatGroup = document.getElementById("RightMatGroup");
+
+//the group of left matrix textboxes
+let leftMatGroup = document.getElementById("LeftMatGroup");
+
 //creates the left matrix
 function UserEntersLeftMatrixSize()
 {
@@ -73,7 +79,7 @@ function UserEntersLeftMatrixSize()
                 currBox.setAttribute("type", "number");
                 currBox.setAttribute("placeholder", 0);
                 currBox.setAttribute("class", "LeftMatVal")
-                document.body.appendChild(currBox);
+                leftMatGroup.appendChild(currBox);
             }
         }
         //user can no longer change the left matrix's sizes
@@ -111,7 +117,7 @@ function UserEntersRightMatrixSize()
                 currBox.setAttribute("type", "number");
                 currBox.setAttribute("placeholder", 0);
                 currBox.setAttribute("class", "RightMatVal")
-                document.body.appendChild(currBox);
+                rightMatGroup.appendChild(currBox);
             }
         }
 
@@ -146,9 +152,9 @@ function UserChangesLeftMatrixSize()
     
     //go through the left matrix and remove the textboxes
     //also remove the values in the left matrix variable
-    for (let i = 0; i < Number(listSize) - 1; i++)
+    for (let i = 0; i < Number(listSize); i++)
     {
-        document.body.removeChild(leftMatList[1]);
+        leftMatGroup.removeChild(leftMatList[0]);
         leftMatrix.pop();
     }
 
@@ -177,9 +183,9 @@ function UserChangesRightMatrixSize()
     
     //remove the right matrix's textboxes
     //remove the values within the right matrix variable
-    for (let i = 0; i < Number(listSize) - 1; i++)
+    for (let i = 0; i < Number(listSize); i++)
     {
-        document.body.removeChild(rightMatList[1]);
+        rightMatGroup.removeChild(rightMatList[0]);
         rightMatrix.pop();
     }
 
@@ -210,7 +216,7 @@ function UserComputesMatrix()
     if (Number(leftMatrix.length) <= 0)
     {
         //take the values from the textboxes and put them into the left matrix variable
-        for (let i = 1; i < Number(currLeftMat.length); i++)
+        for (let i = 0; i < Number(currLeftMat.length); i++)
         {
             leftMatrix.push(Number(currLeftMat[i].value));
         }
@@ -218,9 +224,9 @@ function UserComputesMatrix()
     else
     {
         //take the values in the left matrix variable and set them to be equal to the values in the textboxes
-        for (let i = 1; i < Number(currLeftMat.length); i++)
+        for (let i = 0; i < Number(currLeftMat.length); i++)
         {
-            leftMatrix[i - 1] = Number(currLeftMat[i].value);
+            leftMatrix[i] = Number(currLeftMat[i].value);
         }
     }
 
@@ -242,9 +248,9 @@ function UserComputesMatrix()
     else
     {
         //take the values from the right matrix variable and set them to be equal to the values in the textboxes
-        for (let i = 1; i < Number(currRightMat.length); i++)
+        for (let i = 0; i < Number(currRightMat.length); i++)
         {
-            rightMatrix[i - 1] = Number(currRightMat[i].value);
+            rightMatrix[i] = Number(currRightMat[i].value);
         }
     }
 
@@ -346,10 +352,10 @@ function AddMatrix(currLeftMat)
 
         //change all the values within the left matrix textboxes to reflect the new values
         //user can no longer change the values in the left matrix
-        for (let i = 1; i < Number(currLeftMat.length); i++)
+        for (let i = 0; i < Number(currLeftMat.length); i++)
         {
             let currBox = currLeftMat[i];
-            currBox.value = leftMatrix[i - 1];
+            currBox.value = leftMatrix[i];
             currBox.disabled = true;
         }
     }
@@ -372,10 +378,10 @@ function SubtractMatrix(currLeftMat)
         }
 
         //change the values in the left matrix textboxes to reflect the new values
-        for (let i = 1; i < Number(currLeftMat.length); i++)
+        for (let i = 0; i < Number(currLeftMat.length); i++)
         {
             let currBox = currLeftMat[i];
-            currBox.value = leftMatrix[i - 1];
+            currBox.value = leftMatrix[i];
             currBox.disabled = true;
         }
     }
@@ -455,9 +461,9 @@ function MultiplyMatrix(currLeftMat)
         leftMatrixColSize.value = Number(answerMatrixColSize);
 
         //removes textboxes
-        while (Number(currLeftMat.length) > 1)
+        while (Number(currLeftMat.length) > 0)
         {
-            document.body.removeChild(currLeftMat[1]);
+            leftMatGroup.removeChild(currLeftMat[0]);
         }
 
         //adds textboxes
@@ -468,7 +474,7 @@ function MultiplyMatrix(currLeftMat)
             currBox.setAttribute("value", leftMatrix[i]);
             currBox.setAttribute("class", "LeftMatVal")
             currBox.disabled = true;
-            document.body.appendChild(currBox);
+            leftMatGroup.appendChild(currBox);
         }
     }
     else
@@ -683,7 +689,7 @@ function PreviousEquation()
             currBox.setAttribute("value", leftMatrix[leftItr]);
             currBox.setAttribute("class", "LeftMatVal");
             currBox.disabled = true;
-            document.body.appendChild(currBox);
+            leftMatGroup.appendChild(currBox);
             leftItr++;
         }
     }
@@ -699,7 +705,7 @@ function PreviousEquation()
             currBox.setAttribute("value", rightMatrix[rightItr]);
             currBox.setAttribute("class", "RightMatVal");
             currBox.disabled = true;
-            document.body.appendChild(currBox);
+            rightMatGroup.appendChild(currBox);
             rightItr++;
         }
     }
@@ -760,7 +766,7 @@ function NextEquation()
             currBox.setAttribute("value", leftMatrix[leftItr]);
             currBox.setAttribute("class", "LeftMatVal");
             currBox.disabled = true;
-            document.body.appendChild(currBox);
+            leftMatGroup.appendChild(currBox);
             leftItr++;
         }
     }
