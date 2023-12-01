@@ -1,59 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="CSS/styles.css" />
-    <title>Kaytrix - A Matrix Calculator</title>
-  </head>
-  <body>
-    <div class="Container">
-      <header>
-        <h1 class="title">Kaytrix</h1>
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="tutorial.html">How To Use</a></li>
-            <li><a href="about.html">About Us</a></li>
-          </ul>
-        </nav>
-      </header>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Styles and Javascript ref-->
+  <link rel="stylesheet" href="CSS/styles.css" />
+  <script defer src="JS/scripts.js"></script>
+  <title>Kaytrix - A Matrix Calculator</title>
+</head>
+
+<body>
+  <div class="Container">
+    <header>
+      <h1 class="title">Kaytrix</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tutorial.html">How To Use</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="swup" class="transition-fade">
       <section class="mainKaytrix">
         <h2>Welcome to Kaytrix</h2>
         <br />
         <p>
           Kaytrix is an online calculator that is used for calculating various
           matrices. To get started, check out our
-          <a href="tutorial.html" style="font-weight: bold">How To Use</a> page
-          to learn how to use Kaytrix.
+          <a href="tutorial.html" style="font-weight: bold">How To Use</a>
+          page to learn how to use Kaytrix.
         </p>
       </section>
-    <!--textboxes and buttons-->
-    <input type="number" id="leftMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
-    <input type="number" id="leftMatColSize" min=0 max=10  placeholder=0 maxlength="2">
-    <select name="myOp" id="myOp">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
-    <input type="number" id="rightMatRowSize" min=0 max=10 placeholder=0 maxlength="2">
-    <input type="number" id="rightMatColSize" min=0 max=10  placeholder=0 maxlength="2">
-    <button id="leftButton" onclick="UserEntersLeftMatrixSize()">Create Left Matrix</button>
-    <button id="rightButton" onclick="UserEntersRightMatrixSize()">Create Right Matrix</button>
-    <button id="computeButton" onclick="UserComputesMatrix()" disabled="true">Compute Matrix</button>
-    <button id="prevButton" onclick="PreviousEquation()" disabled="true">Previous</button>
-    <button id="nextButton" onclick="NextEquation()" disabled="true">Next</button>
-    <button id="resetButton" onclick="ResetValues()">Reset</button>
-    <label id="dneLabel"></label>
-    <!--javascript code, leave it at the bottom of body-->
-    <script src="JS/index.js"> 
-    </script>
-      <footer>
-        <h3>Kaytrix</h3>
-        <p>This will be the footer of the matrix</p>
-      </footer>
-    </div>
-  </body>
+      <br />
+      <br />
+      <!--textboxes and buttons-->
+      <div class="matrixCalculator">
+        <input type="number" id="leftMatRowSize" min="0" max="10" placeholder="0" maxlength="2" />
+        <input type="number" id="leftMatColSize" min="0" max="10" placeholder="0" maxlength="2" />
+        <select name="myOp" id="myOp">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+        </select>
+        <input type="number" id="rightMatRowSize" min="0" max="10" placeholder="0" maxlength="2" />
+        <input type="number" id="rightMatColSize" min="0" max="10" placeholder="0" maxlength="2" />
+        <button id="leftButton" onclick="UserEntersLeftMatrixSize()">
+          Create Left Matrix
+        </button>
+        <button id="rightButton" onclick="UserEntersRightMatrixSize()">
+          Create Right Matrix
+        </button>
+        <button id="computeButton" onclick="UserComputesMatrix()" disabled="true">
+          Compute Matrix
+        </button>
+        <button id="prevButton" onclick="PreviousEquation()" disabled="true">
+          Previous
+        </button>
+        <button id="nextButton" onclick="NextEquation()" disabled="true">
+          Next
+        </button>
+        <button id="resetButton" onclick="ResetValues()">Reset</button>
+        <label id="dneLabel"></label>
+      </div>
+    </main>
+    <!-- <script src="https://unpkg.com/swup@4"></script>
+    <script>
+      const swup = new Swup();
+    </script> -->
+    <footer>
+      <h3>Kaytrix</h3>
+
+    </footer>
+  </div>
+</body>
+
 </html>
