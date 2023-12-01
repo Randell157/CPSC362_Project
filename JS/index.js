@@ -59,10 +59,10 @@ let rightMatReady = false;
 let dneLabel = document.getElementById("dneLabel");
 
 //the group of right matrix textboxes
-let rightMatGroup = document.getElementById("RightMatGroup");
+let rightMatGroup = document.querySelector(".RightMatGroup");
 
 //the group of left matrix textboxes
-let leftMatGroup = document.getElementById("LeftMatGroup");
+let leftMatGroup = document.querySelector(".LeftMatGroup");
 
 //creates the left matrix
 function UserEntersLeftMatrixSize()
