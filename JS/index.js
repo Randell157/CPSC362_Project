@@ -240,7 +240,7 @@ function UserComputesMatrix()
     if (Number(rightMatrix.length) <= 0)
     {
         //take the values from the textboxes and put them into the right matrix variable
-        for (let i = 1; i < Number(currRightMat.length); i++)
+        for (let i = 0; i < Number(currRightMat.length); i++)
         {
             rightMatrix.push(Number(currRightMat[i].value));
         }
@@ -343,8 +343,6 @@ function AddMatrix(currLeftMat)
     if ((Number(rightMatrixRowSize.value) == Number(leftMatrixRowSize.value)) && (Number(rightMatrixColSize.value) == Number(leftMatrixColSize.value)))
     {   
         //add values from the right matrix and add it to the values in the left matrix
-        window.alert(leftMatrix);
-        window.alert(rightMatrix);
         for (let i = 0; i < Number(leftMatrix.length); i++)
         {
             leftMatrix[i] += rightMatrix[i];
