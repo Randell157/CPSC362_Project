@@ -310,8 +310,8 @@ function UserComputesMatrix()
     {
 
         //DIVISION
-        InverseRightMatrix();
-        MultiplyMatrix(currLeftMat);
+
+        InverseRightMatrix(currLeftMat);
 
         //user can not change the left matrix sizes
         leftButton.disabled = true;
@@ -483,7 +483,7 @@ function MultiplyMatrix(currLeftMat)
 }
 
 //inverses the right matrix
-function InverseRightMatrix()
+function InverseRightMatrix(currLeftMat)
 {
     //check if the col size is equal to the row size
     if (Number(rightMatrixColSize.value) == Number(rightMatrixRowSize.value))
@@ -589,6 +589,8 @@ function InverseRightMatrix()
                 rightItr++;
             }
         }
+
+        MultiplyMatrix(currLeftMat)
     }
     else
     {
@@ -599,8 +601,30 @@ function InverseRightMatrix()
 //if the calculation is not possible
 function DoesNotExist(myMes)
 {
-    UserChangesLeftMatrixSize();
-    UserChangesRightMatrixSize();
+    //get list of left matrix values
+    let leftMatList = document.getElementsByClassName("LeftMatVal");
+    //get the length of the list of left matrix values
+    let listSize = Number(leftMatList.length);
+    //go through the left matrix and remove the textboxes
+    //also remove the values in the left matrix variable
+    for (let i = 0; i < Number(listSize); i++)
+    {
+        leftMatGroup.removeChild(leftMatList[0]);
+        leftMatrix.pop();
+    }
+
+    //get list of right matrix values
+    let rightMatList = document.getElementsByClassName("RightMatVal");
+    //get the length of the list of right matrix values
+    listSize = Number(rightMatList.length);
+    //go through the right matrix and remove the textboxes
+    //also remove the values in the right matrix variable
+    for (let i = 0; i < Number(listSize); i++)
+    {
+        rightMatGroup.removeChild(rightMatList[0]);
+        rightMatrix.pop();
+    }
+
     rightMatrixColSize.disabled = true;
     rightMatrixRowSize.disabled = true;
     leftMatrixColSize.disabled = true;
