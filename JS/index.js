@@ -310,8 +310,8 @@ function UserComputesMatrix()
     {
 
         //DIVISION
-        InverseRightMatrix();
-        MultiplyMatrix(currLeftMat);
+
+        InverseRightMatrix(currLeftMat);
 
         //user can not change the left matrix sizes
         leftButton.disabled = true;
@@ -483,7 +483,7 @@ function MultiplyMatrix(currLeftMat)
 }
 
 //inverses the right matrix
-function InverseRightMatrix()
+function InverseRightMatrix(currLeftMat)
 {
     //check if the col size is equal to the row size
     if (Number(rightMatrixColSize.value) == Number(rightMatrixRowSize.value))
@@ -589,6 +589,8 @@ function InverseRightMatrix()
                 rightItr++;
             }
         }
+
+        MultiplyMatrix(currLeftMat)
     }
     else
     {
