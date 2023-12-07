@@ -98,19 +98,19 @@ section {
 }
 
 .LeftMatGroup {
-  /* display: flex;
-  flex-wrap: wrap; */
+  display: flex;
+  flex-wrap: wrap;
   width: 49%;
-  display: grid;
-  /* grid-template-columns: repeat(4, 1fr); */
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr); */
   background-color: bisque;
 }
 
 .RightMatGroup {
-  /* display: flex;
-  flex-wrap: wrap; */
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr); */
   width: 49%;
   background-color: pink;
 }
